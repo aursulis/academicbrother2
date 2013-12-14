@@ -72,21 +72,62 @@ assetic:
             inputs:
                 - %kernel.root_dir%/../vendor/jquery/jquery/jquery-1.10.2.js
             output: js/jquery.js
-#Bootstrap configuration            
+#FOSUserBundle configuration
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: AB\Bundle\Entity\User
+    service:
+        user_manager: pugx_user_manager
+    from_email:
+        address: no-reply@academicbrother.lt
+        sender_name: Academic Brother
+    registration:
+        confirmation:
+            enabled: true
+#PUGXMultiUserBundle configuration
+pugx_multi_user:
+  users:
+    candidate:
+        entity:
+          class: AB\Bundle\Entity\Mentor
+#          factory:
+        registration:
+          form:
+            type: AB\Bundle\Form\Type\MentorRegistrationType
+            name: fos_user_registration_form
+            validation_groups:  [Registration, Default]
+          template: ABBundle:Registration:register.mentor.html.twig
+#        profile:
+#          form:
+#            type: AB\Bundle\Type\ProfileCandidateFormType
+#            name: fos_user_profile_form
+#            validation_groups:  [Profile, Default]
+    recruiter:
+        entity:
+          class: AB\Bundle\Entity\Pupil
+        registration:
+          form:
+            type: AB\Bundle\Form\Type\PupilRegistrationType
+          template: ABBundle:Registration:register.pupil.html.twig
+#        profile:
+#          form:
+#            type: Refreshing\AppBundle\Form\Type\ProfileRecruiterFormType
+#Bootstrap configuration
 braincrafted_bootstrap:
     output_dir: %kernel.root_dir%/../web
     assets_dir: %kernel.root_dir%/../vendor/twbs/bootstrap
-    jquery_path: %kernel.root_dir%/../vendor/jquery/jquery/jquery-1.10.2.js
+    jquery_path: %kernel.root_dir%/../vendor/components/jquery/jquery.min.js
     less_filter: less # "less", "lessphp" or "none"
     auto_configure:
         assetic: true
         twig: true
         knp_menu: true
         knp_paginator: true
-    customize_variables:
-        variables_file: ~
-        bootstrap_output: %kernel.root_dir%/Resources/less/bootstrap.less
-        bootstrap_template: BraincraftedBootstrapBundle:Bootstrap:bootstrap.less.twig
+#    customize_variables:
+#        variables_file: ~
+#        bootstrap_output: %kernel.root_dir%/Resources/less/bootstrap.less
+#        bootstrap_template: BraincraftedBootstrapBundle:Bootstrap:bootstrap.less.twig
 # Doctrine Configuration
 doctrine:
     dbal:
