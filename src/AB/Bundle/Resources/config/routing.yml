@@ -1,3 +1,18 @@
-ab_routes:
-    resource: "@ABBundle/Controller"
-    type:     annotation
+#ab_routes:
+#    resource: "@ABBundle/Controller"
+#    type:     annotation
+mentor_registration:
+    pattern:  /register/mentor
+    defaults: { _controller: ABBundle:Registration:registerMentor }
+
+pupil_registration:
+    pattern:  /register/pupil
+    defaults: { _controller: ABBundle:Registration:registerPupil }
+
+home:
+    pattern: /
+    defaults: {_controller: ABBundle:Default:index }
+
+about:
+    pattern: /about
+    defaults: {_controller: ABBundle:Default:about }

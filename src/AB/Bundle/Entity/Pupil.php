@@ -1,12 +1,15 @@
 <?php
 namespace AB\Bundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use PUGX\MultiUserBundle\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="pupil")
+ * @UniqueEntity(fields = "email", targetClass = "AB\Bundle\Entity\User", message="fos_user.email.already_used")
  */
 class Pupil extends User
 {
@@ -88,6 +91,13 @@ class Pupil extends User
      * @ORM\Column(type="integer")
      */ 
     protected $phase;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->courses = new ArrayCollection();
+        $this->addRole("ROLE_PUPIL");
+    }
 
     /**
      * Set homeCity
@@ -227,28 +237,6 @@ class Pupil extends User
         return $this->schoolGrade;
     }
 
-    /**
-     * Set universityChoice
-     *
-     * @param string $universityChoice
-     * @return Pupil
-     */
-    public function setUniversityChoice($universityChoice)
-    {
-        $this->universityChoice = $universityChoice;
-    
-        return $this;
-    }
-
-    /**
-     * Get universityChoice
-     *
-     * @return string 
-     */
-    public function getUniversityChoice()
-    {
-        return $this->universityChoice;
-    }
 
     /**
      * Set courseCategory
