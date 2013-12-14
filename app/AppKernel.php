@@ -19,6 +19,8 @@ class AppKernel extends Kernel
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new AB\Bundle\ABBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new PUGX\MultiUserBundle\PUGXMultiUserBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
