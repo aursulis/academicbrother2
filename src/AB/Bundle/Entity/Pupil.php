@@ -67,8 +67,7 @@ class Pupil extends User
 
     /**
      * @ORM\ManyToOne(targetEntity="CourseCategory", inversedBy="courses")
-     * @ORM\JoinColumn(name="course_category_id", referencedColumnName="id", nullable=false)
-     * @Assert\NotBlank()
+     * @ORM\JoinColumn(name="course_category_id", referencedColumnName="id")
      */
     protected $courseCategory;
 
@@ -87,10 +86,6 @@ class Pupil extends User
     	Additional fields
     */
 
-    /**
-     * @ORM\Column(type="integer")
-     */ 
-    protected $phase;
 
     public function __construct()
     {

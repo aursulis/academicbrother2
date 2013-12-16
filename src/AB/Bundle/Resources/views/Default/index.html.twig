@@ -1,7 +1,9 @@
-{% extends "ABBundle::abbase.html.twig" %}
+{% extends "ABBundle::layout.html.twig" %}
 
+{% block title %}Pradžia{% endblock %}
 {% block content %}
-                    <div class="jumbotron">
+    <div class="panel-shadow">
+                    <div style="text-align: center">
                         <h3>„Academic Brother“ – mentorystės projektas, padedantis Lietuvos moksleiviams įstoti į geriausius užsienio universitetus.</h3>
                         <p class="lead">Siekiame padėti gabiems ir motyvuotiems Lietuvos moksleiviams, nusprendusiems stoti į užsienio universitetus, gauti aukščiausios kokybės išsilavinimą, atitinkantį jų akademinį potencialą; tuo pačiu buriame tarptautinę lietuvių studentų bendruomenę. Projekte dalyvauja užsienyje studijuojantys lietuviai, konsultuojantys ir visapusiškai padedantys paskutiniųjų klasių moksleiviams stojimo procesų metu.</p>
                         <p><a class="btn btn-lg btn-success" href="#" role="button">Registruotis</a></p>
@@ -11,14 +13,52 @@
                         <div class="col-lg-6">
                             <h4>Projekto eiga 2013-14</h4>
                             <p>
-09 28 II-ojo etapo atidarymo renginys<br/>
-10 15 - 12 15 mentorių registracija<br/>
-11 15 - 12 15 mentorių ir moksleivių registracija<br/>
-12 ... Renginys Lietuvoje<br/>
-12 ... - 01 15 moksleivių ir mentorių bendravimas<br/>
-01 15 UCAS paraiškos teikimo terminas<br/>
-</p>
-
+                            <table class="table">
+                                <tr>
+                                    <td>09 28</td>
+                                    <td>II-ojo etapo atidarymo renginys</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    10 15 - 12 15
+                                    </td>
+                                    <td>
+                                    mentorių registracija
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    11 15 - 12 15
+                                    </td>
+                                    <td>
+                                    mentorių ir moksleivių registracija
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    12 ...
+                                    </td>
+                                    <td>
+                                    Renginys Lietuvoje
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    12 ... - 01 15
+                                    </td>
+                                    <td>
+                                    moksleivių ir mentorių bendravimas
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    01 15
+                                    </td>
+                                    <td>
+                                    UCAS paraiškos teikimo terminas
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
 
                         <div class="col-lg-6">
@@ -29,4 +69,5 @@
                           <p><img width=200 src="{{ asset('bundles/ab/images/logoLTBB.png') }}" alt="some_text"/></p>
                         </div>
                     </div>
+    </div>
                 {% endblock %}

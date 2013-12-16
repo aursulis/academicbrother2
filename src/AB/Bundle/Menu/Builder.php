@@ -19,6 +19,18 @@ class Builder extends ContainerAware
             'route' => 'about'
         ));
 
+        $securityContext = $this->container->get('security.context');
+        if ($securityContext->isGranted('ROLE_USER')) {
+            $menu->addChild('Mentoriai', array(
+                'route' => 'mentor_list'
+            ));
+        }
+
+        if ($securityContext->isGranted('ROLE_ADMIN')) {
+            $menu->addChild('Moksleiviai', array(
+                'route' => 'pupil_list'
+            ));
+        }
         return $menu;
     }
 }

@@ -1,10 +1,11 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: "@ABUserBundle/Resources/config/services.yml" }
 
 framework:
     #esi:             ~
-    #translator:      { fallback: %locale% }
+    translator:      { fallback: %locale% }
     secret:          %secret%
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -30,7 +31,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ ABBundle ]
+    bundles:        [ ABBundle, ABUserBundle, FOSUserBundle ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -41,9 +42,12 @@ assetic:
     filters:
         less:
             node: /usr/bin/node
-            node_paths: [%nodejsmodules%]
+            node_paths: [ /usr/lib/node_modules ]
             apply_to: "\.less$"
         cssrewrite: ~
+        uglifyjs2:
+            bin: /usr/bin/uglifyjs
+            apply_to: "\.js$"
     assets:
         bootstrap_css:
             inputs:
@@ -80,11 +84,12 @@ fos_user:
     service:
         user_manager: pugx_user_manager
     from_email:
-        address: no-reply@academicbrother.lt
+        address: academicbrother@gmail.com
         sender_name: Academic Brother
-    registration:
-        confirmation:
-            enabled: true
+#    registration:
+#        confirmation:
+#            form_email:
+#            enabled: true
 #PUGXMultiUserBundle configuration
 pugx_multi_user:
   users:
@@ -98,11 +103,11 @@ pugx_multi_user:
             name: fos_user_registration_form
             validation_groups:  [Registration, Default]
           template: ABBundle:Registration:register.mentor.html.twig
-#        profile:
-#          form:
-#            type: AB\Bundle\Type\ProfileCandidateFormType
-#            name: fos_user_profile_form
-#            validation_groups:  [Profile, Default]
+        profile:
+          form:
+            type: AB\Bundle\Form\Type\MentorProfileType
+            name: fos_user_profile_form
+            validation_groups:  [Profile, Default]
     recruiter:
         entity:
           class: AB\Bundle\Entity\Pupil
@@ -110,14 +115,14 @@ pugx_multi_user:
           form:
             type: AB\Bundle\Form\Type\PupilRegistrationType
           template: ABBundle:Registration:register.pupil.html.twig
-#        profile:
-#          form:
-#            type: Refreshing\AppBundle\Form\Type\ProfileRecruiterFormType
+        profile:
+          form:
+            type: AB\Bundle\Form\Type\PupilProfileType
 #Bootstrap configuration
 braincrafted_bootstrap:
     output_dir: %kernel.root_dir%/../web
     assets_dir: %kernel.root_dir%/../vendor/twbs/bootstrap
-    jquery_path: %kernel.root_dir%/../vendor/components/jquery/jquery.min.js
+    jquery_path: %kernel.root_dir%/../vendor/jquery/jquery/jquery-1.10.2.js
     less_filter: less # "less", "lessphp" or "none"
     auto_configure:
         assetic: true

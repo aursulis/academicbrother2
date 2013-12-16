@@ -61,13 +61,44 @@ class User extends BaseUser//implements AdvancedUserInterface, \Serializable
      */
     protected $lastName;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $phase;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $facebookId;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $linkedinId;
+
     public function __construct()
     {
-//        $this->isActive = false;
-//        $this->salt = md5(uniqid(null, true));
-//        $this->activationKey = substr(md5(uniqid(null, true)), 0, 10);
         parent::__construct();
+        $this->setPhase(3); //TODO: fix
+        $this->plainPassword = substr(md5(uniqid(null, true)), 0, 5);
     }
+
+    /**
+     * @param mixed $phase
+     */
+    public function setPhase($phase)
+    {
+        $this->phase = $phase;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhase()
+    {
+        return $this->phase;
+    }
+
 
 //    /**
 //     * @inheritDoc
@@ -182,18 +213,18 @@ class User extends BaseUser//implements AdvancedUserInterface, \Serializable
 //        return $this;
 //    }
 //
-//    /**
-//     * Set email
-//     *
-//     * @param string $email
-//     * @return User
-//     */
-//    public function setEmail($email)
-//    {
-//        $this->email = $email;
-//
-//        return $this;
-//    }
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        parent::setEmail($email);
+        parent::setUsername($email);
+        return $this;
+    }
 //
 //    /**
 //     * Get email
@@ -316,5 +347,37 @@ class User extends BaseUser//implements AdvancedUserInterface, \Serializable
     {
         return $this->lastName;
     }
-    
+
+    /**
+     * @param mixed $facebookId
+     */
+    public function setFacebookId($facebookId)
+    {
+        $this->facebookId = $facebookId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFacebookId()
+    {
+        return $this->facebookId;
+    }
+
+    /**
+     * @param mixed $linkedinId
+     */
+    public function setLinkedinId($linkedinId)
+    {
+        $this->linkedinId = $linkedinId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLinkedinId()
+    {
+        return $this->linkedinId;
+    }
+
 }

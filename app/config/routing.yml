@@ -5,10 +5,9 @@ main:
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
-# Point FOS profile to AB profile
-#fos_user_profile:
-#    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-#    prefix: /profile
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
 
 #fos_user_profile_show:
 #    pattern: /profile
@@ -38,9 +37,10 @@ login_check:
 logout:
     path:   /logout
 
-
 login_check:
     path:   /login_check
 
 logout:
     path:   /logout
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

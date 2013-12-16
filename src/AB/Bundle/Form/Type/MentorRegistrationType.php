@@ -10,17 +10,6 @@ use Symfony\Component\Validator\Constraints\True;
 
 class MentorRegistrationType extends BaseType
 {
-//    public function buildForm(FormBuilderInterface $builder, array $options)
-//    {
-//        $builder->add('mentor', new MentorType());
-//        $builder->add(
-//            'terms',
-//            'checkbox',
-//            array('property_path' => 'termsAccepted')
-//        );
-//        $builder->add('save', 'submit');
-//    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('firstName');
@@ -30,36 +19,18 @@ class MentorRegistrationType extends BaseType
         ));
         $builder->add('homeCity');
         $builder->add('about');
-
         $builder->add('schoolName');
         $builder->add('schoolGraduationYear');
         $builder->add('schoolCity');
-
         $builder->add('courses', 'collection', array(
             'type' => new CourseType(),
             'allow_add' => true,
             'allow_delete' => true,
+            'by_reference' => false,
             'options'  => array(
                 'required'  => true,
-                //'attr'      => array('class' => '')
             ),
         ));
-//
-//        $builder->addEventListener(
-//            FormEvents::PRE_SET_DATA,
-//            function(FormEvent $event) {
-//                $form = $event->getForm();
-//
-//
-//                $data = $event->getData();
-//
-//
-//
-//
-//            }
-//        );
-
-
         $builder->add('terms', 'checkbox', array(
                 'mapped' => false,
                 "constraints" => new True(array(
@@ -75,7 +46,6 @@ class MentorRegistrationType extends BaseType
             'data_class' => 'AB\Bundle\Entity\Mentor'
         ));
     }
-
 
     public function getName()
     {

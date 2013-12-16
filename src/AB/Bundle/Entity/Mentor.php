@@ -52,7 +52,7 @@ class Mentor extends User
 
     /**
      * @Assert\Valid()
-     * @ORM\OneToMany(targetEntity="Course", mappedBy="mentor", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="Course", mappedBy="mentor", cascade={"persist","remove"})
      */
     protected $courses;
 
@@ -70,7 +70,7 @@ class Mentor extends User
         parent::__construct();
         $this->courses = new ArrayCollection();
         $this->addRole("ROLE_MENTOR");
-        $this->addCourse(new Course());
+        $this->addCourse(new Course()); // an empty Course for the registration form
     }
 
     /**
@@ -219,6 +219,7 @@ class Mentor extends User
      */
     public function addCourse(\AB\Bundle\Entity\Course $courses)
     {
+        $courses->setMentor($this);
         $this->courses[] = $courses;
     
         return $this;

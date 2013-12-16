@@ -16,3 +16,18 @@ home:
 about:
     pattern: /about
     defaults: {_controller: ABBundle:Default:about }
+
+mentor_list:
+    pattern: /view/mentors/{category}/{page}
+    defaults: {_controller: ABBundle:Default:mentorList, page: 1, category: 0 }
+    options:
+        expose: true
+pupil_list:
+    pattern: /view/pupils/{category}/{page}
+    defaults: {_controller: ABBundle:Default:pupilList, page: 1, category: 0 }
+    options:
+        expose: true
+
+message:
+    pattern: /message/{mentorId}
+    defaults: {_controller: ABBundle:Messaging:sendMessage}

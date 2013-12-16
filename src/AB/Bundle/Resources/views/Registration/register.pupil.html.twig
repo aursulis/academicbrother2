@@ -1,4 +1,4 @@
-{% extends "ABBundle::abbase.html.twig" %}
+{% extends "ABBundle::layout.html.twig" %}
 
 {# Enable redefining #}
 {% form_theme form _self %}
@@ -38,6 +38,16 @@
 												 'label_col' : 3,
 												 'label' : 'El. pašto adresas'})
 			}}
+            {{ form_row(form.plainPassword.first, { 'style' : 'horizontal',
+                                                    'widget_col' : 9,
+                                                    'label_col' : 3,
+                                                    'label' : 'Slaptažodis'})
+            }}
+            {{ form_row(form.plainPassword.second, { 'style' : 'horizontal',
+                                                    'widget_col' : 9,
+                                                    'label_col' : 3,
+                                                    'label' : 'Pakartoti'})
+            }}
 			{{ form_row(form.homeCity, { 'style' : 'horizontal',
 												 'widget_col' : 9,
 												 'label_col' : 3,

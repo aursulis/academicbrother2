@@ -1,4 +1,4 @@
-{% extends "ABBundle::abbase.html.twig" %}
+{% extends "ABBundle::layout.html.twig" %}
 
 {# Enable redefining #}
 {% form_theme form _self %}
@@ -55,7 +55,6 @@
 	{% endif %}
 	<div id="register_form">
         <form class="form-horizontal" action="{{ path('mentor_registration') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
-		{#{{ form_start(form, { 'attr' : {'class': 'form-horizontal'} }) }}#}
 	    {{ form_errors(form) }}
 		<fieldset>
 			<legend>Asmeninė informacija</legend>

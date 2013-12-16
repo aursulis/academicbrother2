@@ -28,6 +28,7 @@ class RegistrationController extends Controller
             ->get('pugx_multi_user.registration_manager')
             ->register('AB\Bundle\Entity\Pupil');
     }
+
 }
 //    /**
 //     * @Route("/register/mentor", name="mentor_register")

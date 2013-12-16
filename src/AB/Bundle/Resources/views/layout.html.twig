@@ -1,24 +1,48 @@
 {% extends "::base.html.twig" %}
-{% block all_content %}
+{% block body %}
             <div id="header">
                 {% block header %}
                     <nav class="navbar navbar-default" role="navigation">
                         <div class="navbar-header">
-                            <a class="navbar-brand" href="#">Academic Brother</a>
+                            {#<a class="navbar-brand" href="#">Academic Brother</a>#}
+                            <a class="navbar-brand" href="#">
+                                {#{% image#}
+                                {#'@ABBundle/Resources/public/images/ab_logo.png'#}
+                                {#%}#}
+                                {#<img src="{{ asset_url }}" alt="Refreshing" height="18" />#}
+                                {#{% endimage %}#}
+                                Academic Brother
+                            </a>
                         </div>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             {{ knp_menu_render('ABBundle:Builder:mainMenu', {'currentClass': 'active'}) }}
-                            <div class="navbar-nav navbar-right">
-                                {#{% if is_granted('ROLE_MENTOR') or is_granted('ROLE_PUPIL')  %}#}
-                                    {#<p class="navbar-text navbar-left">{{ app.user.firstName }} {{ app.user.lastName }} </p>#}
-                                    {#<a chass="navbar-right" href="{{ path('logout') }}">#}
+                            <div class="navbar-nav nav navbar-right">
+                                {% if is_granted('ROLE_USER') %}
+                                    <p class="navbar-text navbar-left">{{ app.user.firstName }} {{ app.user.lastName }} </p>
+                                    {#<a chass="navbar-right" href="{{ path('fos_user_security_logout') }}">#}
                                         {#<button type="button" class="btn btn-default navbar-btn">Atsijungti</button>#}
                                     {#</a>#}
-                                {#{% else %}#}
-                                    {#<a href="{{ path('login') }}">#}
-                                        {#<button type="button" class="btn btn-default navbar-btn">Prisijungti</button>#}
-                                    {#</a>#}
-                                {#{% endif %}#}
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle header-settings" data-toggle="dropdown">{{ icon('cog') }} <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ path('fos_user_profile_edit') }}">Profilis</a></li>
+                                            {#{% if is_granted("ROLE_ADMIN") %}#}
+                                                {#<li><a href="{{ path('admin_panel') }}">Admin panel</a></li>#}
+                                            {#{% endif %}#}
+                                            <li>
+                                                <a href="{{ path('fos_user_security_logout') }}">
+                                                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                    <a href="{{ path('fos_user_security_login') }}">
+                                        Prisijungti
+                                    </a>
+                                    </li>
+                                {% endif %}
                             </div>
                         </div>
                     </nav>
@@ -62,7 +86,7 @@
 
           <div class="footer">
             {% block footer %}
-                <p>&copy; Company 2013</p>
+                <p>&copy; Academic Brother 2012-2013</p>
             {% endblock %}
           </div>
 {% endblock %}
