@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 {% endblock %}
-
+{% block title %}Prisijungti{% endblock %}
 {% block fos_user_content %}
     <div class="form-signin">
             <form action="{{ path("fos_user_security_check") }}" method="post">

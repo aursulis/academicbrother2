@@ -43,7 +43,6 @@ class RegistrationController extends BaseController
     {
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
         $userManager = $this->container->get('fos_user.user_manager');
-
         $user = $userManager->findUserByConfirmationToken($token);
 
         if (null === $user) {
@@ -59,11 +58,11 @@ class RegistrationController extends BaseController
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRM, $event);
 
-
         // Generate a new password
         $password = substr(md5(uniqid(null, true)), 0, 7);
         $user->setPlainPassword($password);
-        $userManager->updateUser($user);
+
+        $userManager->updateUser($user, true);
 
         if (null === $response = $event->getResponse()) {
             $url = $this->container->get('router')->generate('fos_user_registration_confirmed');

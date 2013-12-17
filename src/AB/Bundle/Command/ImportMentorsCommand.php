@@ -36,6 +36,10 @@ class ImportMentorsCommand extends ContainerAwareCommand
         return $rows;
     }
 
+    private function removeSlashes($string) {
+        return str_replace(array('/', '\\'), '', $string);
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $em = $this->getContainer()->get('doctrine')->getEntityManager();
@@ -65,22 +69,22 @@ class ImportMentorsCommand extends ContainerAwareCommand
             $mentor->setEmail($data[3]);
 
 
-            $mentorExists = $em->getRepository('ABBundle:Mentor')->findOneBy(array('email' => $data[3]));
+            $mentorExists = $em->getRepository('ABBundle:User')->findOneBy(array('email' => $data[3]));
             if ($mentorExists != null) continue;
 
             $mentor->setHomeCity($data[4]);
             $mentor->setFacebookId($data[5]);
             $mentor->setLinkedinId($data[6]);
-            $mentor->setSchoolName($data[7]);
+            $mentor->setSchoolName($this->removeSlashes($data[7]));
             $mentor->setSchoolCity($data[8]);
             $mentor->setSchoolGraduationYear($data[9]);
-            $mentor->setAbout(stripcslashes($data[10]));
+            $mentor->setAbout($this->removeSlashes($data[10]));
 
             foreach ($unis as $uni) {
                 if ($uni[0] == $data[0]) {
                     $course = new Course();
 
-                    $uniname = str_replace(array('/', '\\'), '', $uni[1]);
+                    $uniname = $this->removeSlashes($uni[1]);
                     $university = $em->getRepository('ABBundle:University')
                         ->findOneByName($uniname);
                     if ($university == null) {
@@ -88,10 +92,10 @@ class ImportMentorsCommand extends ContainerAwareCommand
                     }
                     else $course->setUniversity($university);
 
-                    $course->setCollege($uni[2]);
-                    $course->setName($uni[3]);
+                    $course->setCollege($this->removeSlashes($uni[2]));
+                    $course->setName($this->removeSlashes($uni[3]));
 
-                    $category = $em->getRepository('ABBundle:CourseCategory')->findOneById($uni[4]);
+                    $category = $em->getRepository('ABBundle:CourseCategory')->findOneById($uni[4] + 1);
                     if ($category == null) {
                         $output->writeln($data[3].print_r($uni));
                     }

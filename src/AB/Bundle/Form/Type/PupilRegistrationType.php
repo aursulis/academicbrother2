@@ -17,14 +17,6 @@ class PupilRegistrationType extends BaseType
         $builder->add('email', 'email', array(
             'required' => 'true'
         ));
-        $builder->add('plainPassword', 'repeated', array(
-                'type' => 'password',
-//                'first_options' => array('label' => 'Slaptažodis:'),
-//                'second_options' => array('label' => 'Pakartoti:'),
-                'invalid_message' => 'Slaptažodžiai nesutampa',
-            )
-        );
-
         $builder->add('homeCity');
 
         $builder->add('schoolName');

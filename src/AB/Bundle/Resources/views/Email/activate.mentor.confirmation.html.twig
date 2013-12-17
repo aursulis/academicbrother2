@@ -9,24 +9,25 @@
     {#{% endautoescape %}#}
 {#{% endblock %}#}
 {% block body_html %}
-Sveikas(-a),
-<br/><br/>
-Sveikiname! Tavo registracijos anketa buvo patvirtinta.
-<p>Tau suteiktas slaptažodis: {{ password }}</p>
-<br/><br/>
-Iki gruodžio pabaigos projekto veikla ir mentorystė vyks nuotoliniu būdu: asmeniniais laiškais bei diskusijomis grupėse. Gruodžio pabaigoje Vilniuje bus organizuojamas bendras susitikimas, kurio metu kviesime pristatyti savo universitetą bei pakonsultuoti moksleivius Personal Statement'o rašymo klausimais, taip pat susipažinti ir pabendrauti su kitais mentoriais.
-<br/><br/>
-Kol kas tiek. Jei kils klausimų, rašyk mums academic.brother@gmail.com, arba paskaityk "Apie projektą" skiltį. O dabar kviečiame prisijungti prie AB diskusijų grupių ir užsiprenumeruoti jų naujienas!<br>
-<ul>
-    <li>Facebook grupė: <a href="https://www.facebook.com/groups/1430196147193777/"></a>https://www.facebook.com/groups/1430196147193777/</li>
-    <li>Google grupė: <a href="https://groups.google.com/forum/#!forum/academic-brother-diskusiju-grupe/">https://groups.google.com/forum/#!forum/academic-brother-diskusiju-grupe/</a></li>
-    <li>El. laiškai: tavo el. paštas bus matomas kitiems projekto dalyviams, kurie galės tau parašyti asmeniškai.</li>
-    <li>Susitikimas: daugiau informacijos persiųsime gruodžio mėn.</li>
-</ul>
-<br/><br/>
-sėkmės mentorystėje -
-<br/>
-Academic Brother komanda
+Sveikiname!<br />
+<br />
+Mūsų sistemoje buvo sukurta Tavo prisijungimo paskyra:<br />
+<br />
+Prisijungimo vardas: {{ email }}<br />
+Slaptažodis: {{ password }}<br />
+<br />
+Iki gruodžio pabaigos, kada vyks pagrindinis antrojo etapo renginys, projekto veikla ir mentorystė vyks nuotoliniu būdu: asmeniniais laiškais bei diskusijomis Facebook grupėje.<br />
+<br />
+Prisijungęs prie <a href="{{ path('fos_user_security_login') }}">puslapio</a> puslapio aukščiau nurodytais duomenimis Tu gali pasiskaityti detalius mentorių aprašymus ir parašyti jiems asmeninį laišką bei taip plėsti savo akademinį tinklą. Identišku budu su Tavimi galės susiekti ir moksleiviai, kuriems padėti yra mūsų pagrindinis tikslas! Labai ačiū už Tavo pagalbą padedant jiems spręsti svarbius savo karjeros klausimus.<br />
+<br />
+Taip pat kviečiame prisijungti Facebook grupės ir dalyvauti bendrose diskusijose, dalintis mintimis su kitais moksleiviais ir mentoriais. Norėdami prisijungti sekite šia nuoroda: <a href="https://www.facebook.com/groups/1430196147193777/">https://www.facebook.com/groups/1430196147193777/</a><br />
+<br />
+Jei kils kitų klausimų, rašyk mums <a href="mailto:academic.brother@gmail.com">academic.brother@gmail.com</a><br />
+<br />
+Sėkmės ir produktyvaus bendravimo!<br />
+Academic Brother komanda<br />
+<br />
+P.S. Tavo elektroninis pašto adresas nebus matomas kitiems projekto dalyviams, tačiau prisijungę nariai galės siųsti laiškus Tavo registracijoje nurodytu el.paštu per mūsų puslapį.
 {% endblock %}
 
 

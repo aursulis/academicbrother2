@@ -29,17 +29,21 @@ class DefaultController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         if ($category == 0) {
-            //Show all
-            $mentors = $em->getRepository('ABBundle:Mentor')->findAll();
+            $query = $em->createQuery(
+                'SELECT mentor FROM ABBundle:Mentor mentor
+                 WHERE mentor.roles NOT LIKE :role'.$onlyActivated
+            )->setParameter('role', '%"ROLE_ADMIN"%');
+            $mentors = $query->getResult();
         } else {
             $query = $em->createQuery(
                 'SELECT mentor FROM ABBundle:Mentor mentor
                 WHERE mentor.id in
                 (SELECT IDENTITY(course.mentor)
                 FROM ABBundle:Course course
-                WHERE course.courseCategory = :categoryId)'.
-                $onlyActivated
-            )->setParameter('categoryId', $category);
+                WHERE course.courseCategory = :categoryId)
+                AND mentor.roles NOT LIKE :role'.$onlyActivated
+            )->setParameter('categoryId', $category)
+             ->setParameter('role', '%"ROLE_ADMIN"%');
             $mentors = $query->getResult();
         }
         $categories = $em->getRepository('ABBundle:CourseCategory')->findAll();
@@ -66,10 +70,7 @@ class DefaultController extends Controller
         } else {
             $query = $em->createQuery(
                 'SELECT pupil FROM ABBundle:Pupil pupil
-                WHERE pupil.id in
-                (SELECT IDENTITY(course.pupil)
-                FROM ABBundle:Course course
-                WHERE course.courseCategory = :categoryId)'
+                WHERE pupil.courseCategory = :categoryId'
             )->setParameter('categoryId', $category);
             $pupils = $query->getResult();
         }

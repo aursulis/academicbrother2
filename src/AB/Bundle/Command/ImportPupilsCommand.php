@@ -35,7 +35,6 @@ class ImportPupilsCommand extends ContainerAwareCommand
         return $rows;
     }
 
-
     private function removeSlashes($string) {
         return str_replace(array('/', '\\'), '', $string);
     }
@@ -45,9 +44,7 @@ class ImportPupilsCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine')->getEntityManager();
 
         $inputPupils = $input->getArgument('pupilinput');
-
         $pupils = $this->getRows($inputPupils);
-
 
         $discriminator = $this->getContainer()->get('pugx_user.manager.user_discriminator');
         $discriminator->setClass('AB\Bundle\Entity\Pupil');
@@ -82,12 +79,15 @@ class ImportPupilsCommand extends ContainerAwareCommand
             else $pupil->setCourseCategory($category);
 
             $pupil->setSchoolGrade($data[18]);
-            $pupil->setUniversityRegion($data[21]);
+
+            $regions = array('England', 'London', 'Scotland', 'Other');
+            $region = $regions[intval($data[21])];
+            $pupil->setUniversityRegion($region);
 
             $tokenGenerator = $this->getContainer()->get('fos_user.util.token_generator');
             $pupil->setConfirmationToken($tokenGenerator->generateToken());
 
-            $userManager->updateUser($pupil, true);
+            $userManager->updateUser($pupil);
             $count++;
         }
         $output->writeln("Success, updated $count");

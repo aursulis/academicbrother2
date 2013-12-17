@@ -5,16 +5,21 @@ main:
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
-fos_user_profile:
-    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-    prefix: /profile
 
-#fos_user_profile_show:
-#    pattern: /profile
-#    defaults: { _controller: RefreshingAppBundle:Profile:view }
+#fos_user_profile:
+#    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+#    prefix: /profile
+
+fos_user_profile_show:
+    pattern: /profile
+    defaults: { _controller: ABBundle:Default:index }
 #fos_user_profile_edit:
 #    pattern: /profile/edit
 #    defaults: { _controller: RefreshingAppBundle:Profile:edit }
+
+settings:
+       pattern: /settings
+       defaults: { _controller: ABBundle:Profile:settings }
 
 fos_user_register:
     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
@@ -27,19 +32,8 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
-
-linkedin_login:
-    pattern: /loginOAuth/check-linkedin
-
 login_check:
     path:   /login_check
-
-logout:
-    path:   /logout
-
-login_check:
-    path:   /login_check
-
 logout:
     path:   /logout
 fos_js_routing:

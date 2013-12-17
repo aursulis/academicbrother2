@@ -1,8 +1,13 @@
 <div class="mentor-overview">
     <div class="mentor-avatar col-md-1">
         {% set avatar = "https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=50" %}
-        {% if user.facebookId is not null %}
-            {% set avatar = "https://graph.facebook.com/" ~ user.facebookId ~ "/picture" %}
+        {% if user.facebookId is not null and user.facebookId | length > 3 %}
+            {% set fbId = user.facebookId %}
+            {% if 'facebook.com' in user.facebookId %}
+                {% set components = user.facebookId|split('/') %}
+                {% set fbId = components[components|length - 1] %}
+            {% endif %}
+            {% set avatar = "https://graph.facebook.com/" ~ fbId ~ "/picture" %}
         {% endif %}
         <img src="{{ avatar }}"/>
     </div>
@@ -22,21 +27,36 @@
                 {% endfor %}
             </div>
             <div class="extended" style="display: none">
-                {% if user.schoolName is not null %}
+                {% if user.schoolName is not null and user.schoolName | length > 3%}
                     <div><div class="summary-label">Mokykla: </div>
-                        {{ user.schoolName }}
-                        {% if user.schoolCity is not null %}, {{ user.schoolCity }}{% endif %}
-                        {% if user.schoolGraduationYear is not null %}, {{ user.schoolGraduationYear }}{% endif %}
+                        {{ user.schoolName }}{% if user.schoolCity is not null and user.schoolCity|length > 3 %}, {{ user.schoolCity }}{% endif %}{% if user.schoolGraduationYear != 0 %}, {{ user.schoolGraduationYear }}{% endif %}
                     </div>
                 {% endif %}
                 <div><div class="summary-label">Prisistatymas: </div>
-                    {{ user.about }}
+                    <p>{{ user.about }}</p>
                 </div>
                 <div>
-                    {% if user.facebookId is not null %}<a class="social social-fb" href="http://www.facebook.com/{{ user.facebookId }}"></a>{% endif %}
-                    {% if user.linkedinId is not null %}<a class="social social-lnkd"></a>{% endif %}
+                    {% if user.facebookId is not null and user.facebookId|length > 3 %}
+                        {% set fburl = 'http://www.facebook.com/' %}
+                        {% if 'facebook.com' in user.faceBookId %}
+                            {% set fburl ='' %}
+                        {% endif %}
+                    <a class="social social-fb" href="{{ fburl ~ user.facebookId }}"></a>
+                    {% else %}
+                    <br/><br/>
+                    {% endif %}
+                    {% if user.linkedinId is not null and user.linkedinId|length > 3 %}
+                        {% set lurl = 'http://www.linkedin.com/' %}
+                        {% if 'linkedin.com' in user.linkedinId %}
+                            {% set lurl ='' %}
+                        {% endif %}
+                        {% if 'pub' not in user.linkedinId and 'in' not in user.linkedinId %}
+                            {% set lurl = lurl ~ 'in/' %}
+                        {% endif %}
+                    <a class="social social-lnkd" href="{{ lurl ~ user.linkedinId }}"></a>
+                    {% endif %}
                 </div>
-                {% if is_granted('ROLE_PUPIL') %}
+                {% if is_granted('ROLE_USER') %}
                     <div class="message-button">
                         <a href="{{ path('message', {'mentorId' : user.id}) }}"><button class="btn btn-primary btn-sm">Susisiekti</button>
                         </a>

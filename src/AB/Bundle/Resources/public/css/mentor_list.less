@@ -30,15 +30,18 @@ body {
                     .social {
                         width: 24px;
                         height: 24px;
-                        display: block;
-                        background-size: 100%;
+                        display: inline-block;
+
                         margin: 5px 5px 0 0;
-                        .social-fb {
-                            background: url('../images/facebook.png');
-                        }
-                        .social-lnkd {
-                            background: url('../images/linkedin.png');
-                        }
+
+                    }
+                    .social-fb {
+                        background: url('../images/facebook.png');
+                        background-size: 100%;
+                    }
+                    .social-lnkd {
+                        background: url('../images/linkedin.png');
+                        background-size: 100%;
                     }
                     .message-button {
                         position: absolute;
@@ -68,8 +71,8 @@ body {
 
     .activate {
         position: absolute;
-        bottom: 0;
-        right: 0;
+        top: 0;
+        right: 80px;
         margin-top: 5px;
     }
 }

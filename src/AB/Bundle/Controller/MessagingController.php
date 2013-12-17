@@ -30,10 +30,11 @@ class MessagingController extends Controller
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $user = $this->get('security.context')->getToken()->getUser();
-                $subject = 'Academic Brother: žinuotė nuo '.$user->getFirstName().' '.$user->getLastName();
+                $subject = 'Academic Brother: žinutė nuo '.$user->getFirstName().' '.$user->getLastName();
 
                 $data = $form->getData();
                 $messageText = $data['message'];
+                $messageText.= "\n\n---\nAtsakius į šį laišką, tavo žinutė bus nusiųsta tiesiai į siuntėjo el pašto dėžutę\n";
 
                 $message = \Swift_Message::newInstance()
                     ->setSubject($subject)

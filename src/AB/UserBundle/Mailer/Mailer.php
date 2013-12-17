@@ -66,7 +66,7 @@ class Mailer extends BaseMailer
             //TODO: Handle error
             return false;
         }
-        $this->sendMessage($template, array('password' => $tempPassword),
+        $this->sendMessage($template, array('password' => $tempPassword, 'email' => $user->getEmail()),
                            $this->parameters['fromEmail'], $user->getEmail());
     }
 }

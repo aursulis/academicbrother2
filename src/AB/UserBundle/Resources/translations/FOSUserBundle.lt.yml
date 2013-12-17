@@ -39,7 +39,7 @@ change_password:
 
 # Registration
 registration:
-    check_email: Buvo išsiūstas el. paštas adresu %email%. Jame rasite nuorodą kurią aplankę aktyvuosite savo paskyrą.
+    check_email: Registracija priimta. Artimiausiu metu pranešime, ar tavo anketa buvo patvirtinta.
     confirmed: Sveikiname %username%, jusu paskyra buvo aktyvuota.
     back: Grįžti i praeitą puslapį.
     submit: Registruotis
@@ -68,14 +68,13 @@ resetting:
     flash:
         success: Slaptažodis pakeistas sėkmingai
     email:
-        subject: Nustatyti slaptažodį
+        subject: Academic Brother: Nustatyti slaptažodį
         message: |
             Sveiki %username%!
 
             Norėdami pakeisti savo slaptažodį - prašome apsilankyti %confirmationUrl%
 
-            Pagarbiai,
-            Komanda.
+            AB Komanda.
 
 # Global strings
 layout:

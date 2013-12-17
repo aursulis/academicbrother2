@@ -1,8 +1,8 @@
 {% extends "ABBundle::layout.html.twig" %}
 
 {% block stylesheets %}
-    {#{% stylesheets 'bundles/ab/css/mentor_list.less' filter="less,cssrewrite" %}#}
-    {% stylesheets '@ABBundle/Resources/public/css/mentor_list.less' filter="less" %}
+    {% stylesheets 'bundles/ab/css/mentor_list.less' filter="less,cssrewrite" %}
+    {#{% stylesheets '@ABBundle/Resources/public/css/mentor_list.less' filter="less" %}#}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 {% endblock %}
@@ -33,11 +33,13 @@
                     {% endif %}
                     ">&laquo;</a>
                 </li>
-                {% for i in 1..total %}
-                    <li {% if page == i %} class="active" {% endif %}>
-                        <a href="{{ path('mentor_list', {'page' : i, 'category' : category }) }}">{{ i }}</a>
-                    </li>
-                {% endfor %}
+                    {% for i in 1..total %}
+                        {% if i > 0 %}
+                        <li {% if page == i %} class="active" {% endif %}>
+                            <a href="{{ path('mentor_list', {'page' : i, 'category' : category }) }}">{{ i }}</a>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
                 <li><a href="
                     {% if page < total %}
                         {{ path('mentor_list', {'page' : page + 1, 'category' : category }) }}

@@ -32,25 +32,25 @@ class Pupil extends User
     */
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank()
      */    	
     protected $schoolName;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true)
      * @Assert\NotBlank()
      */
     protected $schoolGraduationYear;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank()
      */
     protected $schoolCity;
 
     /**
-     * @ORM\Column(type="decimal", scale=2)
+     * @ORM\Column(type="decimal", scale=2, nullable=true)
      * @Assert\NotBlank()
      */
     protected $schoolGrade;
@@ -60,14 +60,13 @@ class Pupil extends User
     */
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank()
      */ 
     protected $universityRegion;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CourseCategory", inversedBy="courses")
-     * @ORM\JoinColumn(name="course_category_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="CourseCategory", inversedBy="pupils")
      */
     protected $courseCategory;
 
@@ -77,7 +76,7 @@ class Pupil extends User
     protected $courseName;    
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      * @Assert\NotBlank()
      */
     protected $motivation;
